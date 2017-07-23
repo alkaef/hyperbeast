@@ -12,3 +12,6 @@ _ncmpcpp + cava
 
 _i3lock
 ![i3lock](http://imgur.com/oIUQ9BA.png "i3lock")
+
+
+
