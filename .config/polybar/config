@@ -1,0 +1,517 @@
+; hyperbeast colorscheme https://github.com/alkaef/hyperbeast
+
+[colors]
+
+black = #FF000000
+
+; based on base 16 colors by Chris Kempson
+; if your polybar uses argb add one of this code before the 6-digit hex code
+;100% — FF
+;95% — F2
+;90% — E6
+;85% — D9
+;80% — CC
+;75% — BF
+;70% — B3
+;65% — A6
+;60% — 99
+;55% — 8C
+;50% — 80
+;45% — 73
+;40% — 66
+;35% — 59
+;30% — 4D
+;25% — 40
+;20% — 33
+;15% — 26
+;10% — 1A
+;5% — 0D
+;0% — 00
+
+base00 = #000000
+base01 = #282a2e
+base02 = #373b41
+base03 = #969896
+base04 = #b4b7b4
+base05 = #c5c8c6
+base06 = #e0e0e0
+base07 = #ffffff
+base08 = #e02772
+base09 = #de935f
+base0A = #e3a144
+base0B = #b5bd2d
+base0C = #5595c6
+base0D = #285b87
+base0E = #822570
+base0F = #a3685a
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[bar/main]
+;monitor = ${env:MONITOR:LVSD-1}
+bottom = false
+width = 100%
+height = 26
+offset-x = 0
+offset-y = 0
+
+background = ${colors.base00}
+foreground = ${colors.base06}
+
+; modules
+modules-left = bspwm i3 xwindow s arrowright
+modules-center = mpd mySpotify
+modules-right = cpu temperature myVolume myBacklight battery s myEth myWlan s s arrowleft date arrowleft
+
+; unused modules
+; mySpotify myLoad systemRoot myLoad xkeyboard powermenu
+
+; spacing
+spacing = 1
+padding-left = 0
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+
+; fonts
+font-0 = Roboto Regular:pixelsize=8;+2
+font-1 = FontAwesome:pixelsize=8;+2.5
+
+; tray applets
+tray-position = right
+tray-padding = 0
+tray-transparent = false
+tray-background = ${colors.base00}
+
+; workspace scroll
+wm-restack = i3
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+label-background = ${colors.base00}
+label-padding = 2
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-underline = ${colors.base08}
+format-prefix = " "
+format-prefix-foreground = ${colors.base06}
+
+label-layout = %layout%
+
+label-indicator-padding = 2
+label-indicator-background = ${colors.base08}
+label-indicator-underline = ${colors.base08}
+
+[module/bspwm]
+type = internal/bspwm
+ws-icon-default = x
+
+label-focused = %index%
+label-focused-background = ${colors.base08}
+label-focused-underline= ${colors.base0A}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%
+label-urgent-background = ${colors.base08}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.base06}
+label-empty-padding = 2
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.base0A}
+
+label-focused = %index%
+label-focused-foreground = ${colors.base08}
+label-focused-background = none
+label-focused-underline = ${colors.base08}
+label-focused-padding = 4
+
+label-unfocused = %index%
+label-unfocused-foreground = ${colors.base07}
+label-unfocused-padding = 4
+
+label-urgent = %index%
+label-urgent-background = ${colors.base08}
+label-urgent-padding = 4
+
+label-visible = %index%
+label-visible-foreground = ${module/bspwm.label-empty-padding}
+label-visible-padding = ${module/bspwm.label-empty-padding}
+
+[module/theme]
+format-background = ${colors.base00}
+format-padding = 2
+format-foreground = ${self.format-underline}
+
+format-connected-background = ${module/theme.format-background}
+format-unconnected-background = ${module/theme.format-background}
+format-mounted-background = ${module/theme.format-background}
+format-unmounted-background = ${module/theme.format-background}
+format-charging-background = ${module/theme.format-background}
+format-discharging-background = ${module/theme.format-background}
+
+format-connected-padding = ${module/theme.format-padding}
+format-unconnected-padding = ${module/theme.format-padding}
+format-mounted-padding = ${module/theme.format-padding}
+format-unmounted-padding = ${module/theme.format-padding}
+format-charging-padding = ${module/theme.format-padding}
+format-discharging-padding = ${module/theme.format-padding}
+
+format-mounted-foreground = ${self.format-mounted-underline}
+format-unmounted-foreground = ${self.format-unmounted-underline}
+
+[module/mpd]
+type = internal/mpd
+inherit = module/theme
+
+;host = 127.0.0.1
+;port = 6600
+
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 2
+
+;format-online = <toggle>   <label-song>    [ <label-time>  ]
+format-online-prefix ="  "
+format-online-prefix-foreground=${colors.base08}
+format-online = <label-song>
+;label-song = %title% - %artist%
+
+label-song = %title% - %artist%
+label-song-maxlen = 20
+label-song-ellipsis = true
+
+icon-prev = 
+icon-seekb = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+icon-seekf = 
+
+icon-random = 
+icon-repeat = 
+
+toggle-on-foreground = ${colors.base0A}
+toggle-off-foreground = #66
+
+;format-online-prefix = " "
+;format-online-underline = #20dfdf
+;format-online-background = #0d5959
+;format-online-padding = 4
+
+[module/mySpotify]
+inherit = module/theme
+interval = 1
+type = custom/script
+exec = /usr/share/i3blocks/mediaplayer
+click-left = i3-msg workspace number 9
+label = %output:0:30:...%
+format-prefix = " "
+format-underline = #20dfdf
+format-foreground = ${colors.base07}
+format-background = #0d5959
+
+[module/myVolume]
+inherit = module/theme
+interval = 0.5
+type = custom/script
+#exec = /usr/lib/i3blocks/volume 5 pulse
+exec = /usr/share/i3blocks/volume 5 pulse
+#command = /usr/lib/i3blocks/volume 5 pulse
+command = /usr/share/i3blocks/volume 5 pulse
+scroll-up = pactl set-sink-volume 1 +1%
+scroll-down = pactl set-sink-volume 1 -1%
+click-left = xfce4-terminal -e "ncmpcpp" &
+click-right = pavucontrol &
+format-prefix = "  "
+format-prefix-foreground = ${colors.base08}
+;format-underline = #20dfdf
+format-underline = ${colors.base07}
+
+[module/myLoad]
+inherit = module/theme
+interval = 1
+type = custom/script
+exec = /usr/lib/i3blocks/load_average
+click-left = i3-sensible-terminal -e "htop" &
+format-prefix = "  "
+;format-underline = #d33636
+format-underline = #F56960
+
+[module/systemRoot]
+inherit = module/theme
+type = internal/fs
+interval = 20
+mount-0 = /
+label-mounted = " %free%"
+label-unmounted = " unmounted"
+format-mounted-underline = ${colors.base0B}
+format-unmounted-underline = ${colors.base08}
+
+[module/systemHome]
+inherit = module/theme
+type = internal/fs
+interval = 20
+format-prefix = ""
+mount-0 = /home
+label-mounted = " %free%"
+label-unmounted = " ??"
+format-mounted-underline = ${colors.base0B}
+format-unmounted-underline = ${colors.base08}
+
+[module/myBacklight]
+type = internal/backlight
+card = intel_backlight
+format = <ramp> <label>
+
+label = %percentage%%
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+ramp-foreground = ${colors.base08}
+
+[module/cpu]
+inherit = module/theme
+type = internal/cpu
+interval = 2
+format-label = internal/cpu
+#format = <ramp-coreload> <label>
+format-prefix = "  "
+format-prefix-foreground = ${colors.base08}
+format-underline = ${colors.base08}
+label = %percentage%
+
+[module/memory]
+inherit = module/theme
+type = internal/memory
+interval = 2
+format-prefix = " "
+;format-underline = #999999
+format-underline = #F56960
+label = %percentage_used%
+
+[module/myWlan]
+inherit = module/theme
+type = internal/network
+interface = wlp3s0
+interval = 1.0
+
+format-connected = <label-connected>
+format-connected-underline = ${colors.base08}
+format-disconnected-underline = ${colors.base08}
+
+;label-connected = " %local_ip% %signal% %downspeed% %upspeed%"
+;label-connected = " %signal% [  %downspeed% ] [  %upspeed% ]"
+label-connected = " %downspeed%  %upspeed%"
+;label-disconnected = "OFFLINE"
+;label-connected-foreground = ${colors.base0B}
+;label-disconnected-foreground = ${colors.base0B}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.base07}
+
+[module/myEth]
+type = internal/network
+interface = enp4s0
+interval = 1.0
+
+format-connected-underline = ${colors.base07}
+format-connected-prefix = " "
+
+;label-connected = Connected %local_ip%
+label-connected = " %downspeed%  %upspeed%"
+
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %ifname% disconnected
+label-disconnected-foreground = ${colors.base07}
+
+[module/date]
+inherit = module/theme
+type = internal/date
+interval = 1
+
+#time = "%a - %d.%m.%Y - %H:%M:%S"
+time = "%H:%M  "
+#time-alt = "%a - %d.%m.%Y - %I:%M %p"
+time-alt = "%A / %d.%m.%Y / %H:%M:%S"
+
+;format-prefix = " "
+format-underline = ${colors.base07}
+
+label = %date% %time%
+
+[module/volume]
+inherit = module/theme
+type = internal/volume
+
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+label-volume-foreground = ${colors.base07}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.base08}
+label-muted = sound muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = true
+bar-volume-indicator = │
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.base07}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/battery]
+inherit = module/theme
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+#label-charging = " %percentage%% [%time%]"
+label-charging = " %percentage%% [%time%]"
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = ${colors.base03}
+
+label-discharging = "%percentage% [%time%]"
+#format-discharging = <ramp-capacity> <label-discharging>
+format-discharging = <ramp-capacity>
+format-discharging-underline = ${self.format-charging-underline}
+
+label-charging-foreground = ${self.format-charging-underline}
+label-discharging-foreground = ${self.format-charging-underline}
+
+label-full = "[Fully charged]"
+format-full-prefix = "  "
+label-full-foreground = ${colors.base03}
+format-full-underline = ${self.format-charging-underline}
+format-full = <ramp-capacity> <label-full>
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${self.format-charging-underline}
+ramp-capacity-0-foreground = ${colors.base08}
+ramp-capacity-1-foreground = ${colors.base08}
+ramp-capacity-2-foreground = ${colors.base09}
+ramp-capacity-3-foreground = ${colors.base0A}
+ramp-capacity-4-foreground = ${colors.base0B}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${self.format-charging-underline}
+animation-charging-framerate = 750
+animation-charging-0-foreground = ${colors.base08}
+animation-charging-1-foreground = ${colors.base08}
+animation-charging-2-foreground = ${colors.base09}
+animation-charging-3-foreground = ${colors.base0A}
+animation-charging-4-foreground = ${colors.base0B}
+
+[module/temperature]
+inherit = module/theme
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 65
+format-prefix = " "
+format-prefix-foreground = ${colors.base08}
+
+format = <label>
+format-underline = ${colors.base08}
+format-warn = <label-warn>
+format-warn-underline = ${self.format-underline}
+format-warn-prefix = " "
+
+label = %temperature%
+label-warn = %temperature%
+format-warn-foreground = ${colors.base07}
+format-warn-background = ${colors.base08}
+format-warn-padding = ${self.format-padding}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.base07}
+
+[module/powermenu]
+type = custom/menu
+
+label-open =  power
+label-open-foreground = ${colors.base09}
+label-close =  cancel
+label-close-foreground = ${colors.base09}
+label-separator = |
+label-separator-foreground = ${colors.base07}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+; vim:ft=dosini
+
+[module/s]
+type = custom/text
+content = " "
+
+[module/arrowleft]
+type = custom/text
+content = ""
+
+[module/arrowright]
+type = custom/text
+content = ""
