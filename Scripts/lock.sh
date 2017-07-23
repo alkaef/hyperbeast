@@ -14,7 +14,7 @@ convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
 
 B='#00000000'  # blank
 C='#00000070'  # clear ish
-D='#8e8e8ecc'  # default
+D='#0e3066cc'  # default
 T='#ffffffee'  # text
 W='#e02772bb'  # wrong
 I='#b5bd2dbb'  # input
@@ -29,7 +29,7 @@ i3lock                \
 --separatorcolor=$B   \
 \
 --insidevercolor=$C   \
---ringvercolor=$V     \
+--ringvercolor=$D     \
 \
 --insidewrongcolor=$C \
 --ringwrongcolor=$W   \
